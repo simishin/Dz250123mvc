@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1> калькулятор теоремы коссинусов. </h1>
+    <h2>Введите исходные данные</h2>
+<!--    <form th:method="post" >-->
+        <form th:method="post" th:action="@{/service}">
+        <label> sideFirst:
+            <input type="number" name="sideFirst"/>
+        </label><label> sideSecond:
+            <input type="number" name="sideSecond"/>
+        </label><label> corner:
+            <input type="number" name="corner"/>
+        </label><label> measure:
+            <input type="text" name="measure"/>
+        </label>
+        <button>Рассчитать</button>
+    </form>
+    <div>
+        Результат :<br>
+        [[${zzz}]]
+    </div>
+
+    <a th:href="@{/}">На главную страницу</a>
+</body>
+</html>

@@ -1,4 +1,5 @@
 package qwr.dz.logic;
+import org.springframework.stereotype.Service;
 import qwr.dz.entity.Answer;
 import qwr.dz.entity.Demand;
 
@@ -7,6 +8,7 @@ import qwr.dz.entity.Demand;
  * нахождение третьей стороны до двум сторонам и углу между ними.
  * Угол может быть в градусах или радианах либо так и так.
  */
+@Service //добавил, но без этого не работает. @Component в интерфейсе не хватает
 public class ActionImpl implements IAction{
     @Override
     public Answer action(Demand x) {
