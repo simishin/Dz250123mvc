@@ -8,7 +8,7 @@
     <h1> калькулятор теоремы коссинусов. </h1>
     <h2>Введите исходные данные</h2>
 <!--    <form th:method="post" >-->
-        <form th:method="post" th:action="@{/service}">
+        <form th:method="post" th:action="@{/service-handler}">
         <label> sideFirst:
             <input type="number" name="sideFirst"/>
         </label><label> sideSecond:
@@ -20,9 +20,16 @@
         </label>
         <button>Рассчитать</button>
     </form>
-    <div>
-        Результат :<br>
-        [[${zzz}]]
+    <th:block th:if="${zzz != null}">
+        *********************************************
+    </th:block>
+    <div th:if="${zzz != null}">
+        <p> Уровнение : <br>[[${str}]]</p>
+        <div>
+            Результат :<br>
+            [[${zzz}]]
+        </div>
+
     </div>
 
     <a th:href="@{/}">На главную страницу</a>

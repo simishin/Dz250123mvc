@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import qwr.dz.entity.Answer;
 import qwr.dz.entity.Demand;
 import qwr.dz.logic.ActionImpl;
@@ -28,15 +29,21 @@ public class ApplicationController {
     public String serviceForm() {
     return "service-form";
     }
-    @PostMapping("/service")
-    public String serviceForm(@RequestParam double sideFirst, @RequestParam double sideSecond,
-                              @RequestParam double corner, @RequestParam String measure, Model model){
-        System.out.println("*******************"+ measure);
+    @PostMapping("/service-handler")
+    public String serviceHandler(@RequestParam double sideFirst, @RequestParam double sideSecond,
+                                 @RequestParam double corner, @RequestParam(defaultValue = "g") String measure,
+//                                 Model model,
+                                 RedirectAttributes rda){
         Answer z = elm.action(new Demand(sideFirst, sideSecond, corner, measure));
+        String str = " "+sideFirst +"*"+sideFirst+"+"+sideSecond+"*"+sideSecond+"-2*"+sideFirst+"*"+
+                sideSecond+"* cos("+corner+" "+measure+" )";
         System.out.println("******************** "+z.oppositeSide());
 //        model.addAttribute("zzz", "ziiii");
-        model.addAttribute("zzz", z.oppositeSide().toString());
-
-        return "service-form";
+//        model.addAttribute("zzz", z.oppositeSide().toString());
+//        model.addAttribute("str", str);
+//        return "service-form";
+        rda.addFlashAttribute("zzz", z.oppositeSide().toString());
+        rda.addFlashAttribute("str", str);
+        return "redirect:service";
     }
 }
